@@ -1,11 +1,8 @@
 \documentclass{article}
 \usepackage{graphics}
 \usepackage{graphicx}
-\usepackage[T1]{fontenc}
-\usepackage{float}
-\usepackage[margin=1in]{geometry}
-\usepackage[utf8]{inputenc}
 
+\usepackage[utf8]{inputenc}
 
 \DeclareGraphicsExtensions{.eps}
 
@@ -43,26 +40,13 @@ showstringspaces=false            %
 {}
 
 \title{CS 742 Foundations of Network Security and Cryptography \\ Assignment 2}
-\author{
-  Ajay Kedare \\
-  153059007
-  \and
-  Astha Jada \\
-  153050027
-  \and
-  Neha Garg \\
-  153050039
-  \and
-  Sankalp Rangare \\
-  153050087
-}
-%\author{ Ajay Kedare   \space \space 153059007\\ Astha Jada \space \space 153050027 \\ Neha Garg \space \space \space  153050039\\ Sankalp Rangare \space \space 153050087 }
+\author{ Ajay Kedare   \space \space 153059007\\ Astha Jada \space \space 153050027 \\ Neha Garg \space \space \space  153050039\\ Sankalp Rangare \space \space 153050087 }
 \begin{document}
 \maketitle
 \clearpage
 
-\section*{Computing SHA-1}
-\subsection*{I. (a) Using OpenSSL, compute the SHA-1 hash of a message. Show the output.
+\section{Computing SHA-1}
+\subsection{I (a) Using OpenSSL, compute the SHA-1 hash of a message. Show the output.
 Next change a single bit in the message and show the output. What differences
 do you observe? Comment on your observations.}
 
@@ -87,9 +71,9 @@ Following steps were followed for computing SHA-1 of the message using openssl:\
  
 
 
-\section*{Computing MAC}
-\subsection*{I(b). Use OpenSSL to}
-\subsubsection*{(i) compute the CBC MAC of a message (ii) verify the CBC MAC on that message} 
+\section{Computing MAC}
+\subsection{I(b) Use OpenSSL to}
+\subsubsection{(i) compute the CBC MAC of a message (ii) verify the CBC MAC on that message} 
 
 \noindent For computing CBC of the message we created a file 'file.txt' that has the message.
 
@@ -116,7 +100,7 @@ Following steps were followed for computing SHA-1 of the message using openssl:\
 \noindent Alternately, the commands shown in above figure can be used for computing the CBC MAC. Here in encryption by using -salt option we provide the password and it internally generates key and iv based on password provided. This password is then provided with -k option during decryption.
 
 
-\subsubsection*{(iii) compute the hash MAC of a message}
+\subsubsection{(iii) compute the hash MAC of a message}
 
 \noindent To compute the hash MAC of the message the following command can be used:\\
 \textbf{openssl dgst -sha1 -hmac pass file.txt}\\
@@ -126,11 +110,11 @@ HMAC-SHA1(file.txt)= e6bffdfa2767f2def627fad887b4ddc226ea5dd9\\
 
 \noindent The HMAC is computed using SHA-1 algorithm with 'pass' as the key and the message to be encrypted is contained in file.txt
 
-\subsubsection*{(iv) verify the hash MAC on that message}
+\subsubsection{(iv) verify the hash MAC on that message}
 
 \noindent When the receiver receives the message it calculates the hash MAC on the received message using the common shared key and if it is same as that received then the hash MAC is said to be verified.
 
-\subsubsection*{(v) sign a message (vi) verify a signature on that message}
+\subsubsection{(v) sign a message (vi) verify a signature on that message}
 
 Following steps are performed to sign a message and then verify the signature on that message:
 
@@ -153,8 +137,8 @@ Following steps are performed to sign a message and then verify the signature on
 
 
 
-\section*{Baby Step,Giant Step}
-\subsection*{II. Use the "Baby Step, Giant Step” Algorithm discussed in class to crack the
+\section{Baby Step,Giant Step}
+\subsection{II Use the "Baby Step, Giant Step” Algorithm discussed in class to crack the
 Discrete Logarithm problem. Your program should input p (the prime number), g
 (the generator) and y (the integer whose discrete log is desired) and output x
 (the discrete log). Use different sizes for p (8, 10, 12, 14, 16, 18, 20 . . . bits).
@@ -300,10 +284,10 @@ for i in range(8,34 ,2):
     babystepgiantstep(i)
 \end{python}
 
-\vspace{50px}
+
 \noindent Using this we computed the execution time for calculating the discrete log for prime numbers of different bits. \\
 
-\noindent Below is the graph plotted for prime number in bits against exection time in seconds. \\
+Below is the graph plotted for prime number in bits against exection time in seconds. \\
 
 \begin{figure}[htb]
 		\includegraphics[width=15cm,height=8cm]{bsgsGraph}
@@ -311,10 +295,8 @@ for i in range(8,34 ,2):
 \end{figure}
 
 
-
-\clearpage
-\section*{XSS attack vectors for DVWA}
-\subsection*{III Create your own XSS attack vector(s) for DVWA at each security level - low,
+\section{XSS attack vectors for DVWA}
+\subsection{III Create your own XSS attack vector(s) for DVWA at each security level - low,
 medium and high. Investigate why each attack vector works or fails at the
 different security levels. Both, persistent and non-persistent (reflected) XSS
 attacks should be attempted.}
@@ -325,8 +307,7 @@ browser.\\
 most common type. These holes show up when the data provided by a web client, most commonly
 in HTTP query parameters or in HTML form submissions, is used immediately by server-side scripts
 to generate a page of results for that user, without properly sanitizing the request.\\
-\subsection*{1. Persistent XSS}
-\subsubsection*{1.1 Level Low}
+\subsection{Persistent XSS-Level Low}
 We'll first change the dvwa security to low.After setting the level click on XSS stored( present on left side).A page will open having name , message textbox along with 'sign guestbook' button. We can enter below attack vectors in name and message textbox.\\
 Name: User\\
 Message: <script> alert("hi")</script>\\
@@ -352,9 +333,9 @@ On second machine we'll open the DVWA login page. Now open the cookie editor and
 		\caption{Editing cookie value in Cookie Editor}
 	\end{figure}
 First we'll edit the PHPSESSID cookie and paste the cookie which we have copied earlier in the content textbox. Then we'll modify the security cookie and set the value as low in content textbox and save the changes.Now we'll remove the "login.php" from the URL address and when we press enter we'll be able to login into the dvwa site without providing any credentials.
-\subsubsection*{1.2 Level Medium}
-We'll first change the dvwa security to medium. After setting the level click on XSS stored( present on left side). We can enter any one of the  below attack vectors in name textbox. But the size of any input text in name textbox can't be more than 10 characters (maxlength=10), so using firebug we can change the maxlength=80 and then we can enter the below scripts.\\
-\\  <script language="javascript">alert("Hi")</script>\\
+\subsection{Persistent XSS-Level Medium}
+We'll first change the dvwa security to medium.After setting the level click on XSS stored( present on left side).We can enter any one of the  below attack vectors in name textbox. But the size of any input text in name textbox can't be more than 10 characters (maxlength=10), so using firebug we can change the maxlength=80 and then we can enter the below scripts.\\
+<script language="javascript">alert("Hi")</script>\\
 <scrip<script>t> alert("hi")</script>\\
 <SCRIPT> alert('hi');</SCRIPT>\\
 In name textbox we can't write <script> keyword directly as the code is replacing <script> keyword with ''(null string).So we have modified the attack vectors accordingly.
@@ -365,11 +346,10 @@ cat /var/www/html/dvwa/vulnerabilities/xss\_s/source/medium.php-This command is 
 We can steal the cookie in the same way as we did for Persistent XSS-Level Low. But now our attack vector will be in below form and need to put it in name textbox.\\
 <SCRIPT>alert(document.cookie)</SCRIPT>\\
 While modifying  the security cookie we'll set the value as medium in content textbox. Rest steps of cookie stealing are same as Persistent XSS-Level Low cookie stealing.
-\subsubsection*{1.3 Level High}
+\subsection{Persistent XSS-Level High}
 We'll first change the dvwa security to high.The “High” level is the secure considered level (it is supposed to be the secure version and not to be passed to teach the secure implementation of web applications for developers).
 
-\subsection*{2. Reflected XSS}
-\subsubsection*{2.1 Level Low}
+\subsection{Reflected XSS-Level Low}
 We'll first change the dvwa security to low.After setting the level click on XSS Reflected( present on left side).A page will open having a textbox and 'submit' button. We can enter below attack vectors in the textbox.\\
 <script> alert('hi');</script>\\
 <SCRIPT> alert('hi');</SCRIPT>\\
@@ -378,7 +358,7 @@ The code is directly echoing the input entered in the textbox without any filter
 \textbf{Stealing cookies}\\
 We can steal the cookie in the same way as we did for Persistent XSS-Level Low. But here we'll enter the attack vector in the textbox available rather than the message texbox, rest of the steps are same.
 
-\subsubsection*{2.2 Level Medium}
+\subsection{Reflected XSS-Level Medium}
 We'll first change the dvwa security to medium.After setting the level click on XSS Reflected( present on left side).A page will open having a textbox and 'submit' button. We can enter below attack vectors in the textbox.\\
 <script language="javascript">alert("Hi")</script>\\
 <scrip<script>t> alert("hi")</script>\\
@@ -388,78 +368,16 @@ cat /var/www/html/dvwa/vulnerabilities/xss\_r/source/medium.php--This command is
 The code is directly echoing the input entered in the textbox after replacing <script> keyword with ''(null string). .\\
 \textbf{Stealing cookies}\\
 We can steal the cookie in the same way as we did for Persistent XSS-Level Medium. But here we'll enter the attack vector in the textbox available rather than the name texbox, rest of the steps are same.
-\subsubsection*{2.3 Level High}
+\subsection{Reflected XSS-Level High}
 We'll first change the dvwa security to high.The “High” level is the secure considered level (it is supposed to be the secure version and not to be passed to teach the secure implementation of web applications for developers).
 
 
-\section*{IV. SQL Injection}
+\section{SQL Injection}
+\subsection{(Level 1) Add yourself as a user with your own username and password providing your IITB roll number in details.}
+\subsection{(Level 2) Find out the username-password pairs of ALL the users of this portal.}
+\subsection{(Level 3) Find out names of all the tables in the database.}
 
-\subsection*{1. (Level 1) Add yourself as a user with your own username and password providing your IITB roll number in details.}
-  Attack vector for this level is:\\
-        \textbf{a.\space \space admin'\#}\\
-  Using this in 'User name' field, we can login as an 'admin' and create/add a user.\\
-  \begin{figure}[htb]
-		\includegraphics[width=8cm,height=5cm]{1.png}
-	\caption{Creating a user}
-	\end{figure}
-       
-       \textbf{b.\space \space 'union all select user,pass from users where user='admin'\#}\\
-               Enter this attack vector in password field.\\
-               This will dump the password of admin on the Home page.\\
-   
-   \begin{figure}[htb]
-		\includegraphics[width=8cm,height=4cm]{2.png}
-	\caption{Getting the password of admin}
-	\end{figure}
-        Encircled text is the password of the admin.\\
 
-\subsection*{2. (Level 2) Find out the username-password pairs of ALL the users of this portal.}
-        As we know the password of the admin,we logged in as admin in level 2.\\
-        In the 'search names' box,enter this attack vector:\\
-        \textbf{' union all select user,pass,null from users\#}\\
-        This will just dump the name of all the users and their passwords on the page.\\
-        
-        \begin{figure}[H]
-		\includegraphics[width=8cm,height=8cm]{3.png}
-	\caption{Passwords of users}
-	\end{figure}
-	
-	Some other attack vectors(all tried on search name box):\\
-	\textbf{(a)\space \space' union all select null,null,database()\#}\\
-	           This will dump the name of the database.\\\\
-	\textbf{(b)\space \space' union all select null,null,load\_file('/var/www/html/sql/2/login.php')\#}\\
-	           This will load the 'login.php' files stored in the server.\\
-	           Similarly we can see other files also.\\
-	           By analysing these php files,we can see what kind of syntax and logic is used and
-	           this will help us to design the attack vectors and also to improve them.\\
-        
-        \begin{figure}[H]
-		\includegraphics[width=8cm,height=8cm]{4.png}
-	\caption{Code snippet of login.php}
-	\end{figure}
-        
-\subsection*{3. (Level 3) Find out names of all the tables in the database.}
-           Login in level 3 as admin.\\
-           By analysing the code for 'login.php'(using load\_file in previous level) for level 3,we came to know that function \textbf{str\_ireplace('UNION', '', \$q)} 
-           is used to prevent us from using 'union' in our attack vectors.\\
-           So we design our attack vectors in such a way to bypass this function.\\
-           
-           \textbf{(a)\space \space \%' UunionNION All select TABLE\_TYPE,TABLE\_SCHEMA,table\_name FROM INFORMATION\_SCHEMA.TABLES\#}\\
-             This attack vectors dumps the information related to TABLES and INFORMATION\_SCHEMA.\\
-             Here,in attack vectors \textbf{UunionNION} is used in place of \textbf{UNION} to bypass \textbf{str\_ireplace()} function.
-             \begin{figure}[H]
-		\includegraphics[width=8cm,height=8cm]{5.png}
-	\caption{Tables name and information schema}
-	\end{figure}
-	
-	\textbf{(b) \space \space \%' UunionNION All select TABLE\_TYPE,TABLE\_SCHEMA,table\_name FROM INFORMATION\_SCHEMA.TABLES where TABLE\_SCHEMA='assign2'\#}\\
-	 This attack vector when entered in 'search name' box will gives us the name of tables in that database 'assign2'.\\ \\
-	 \textbf{(c)\space \space\%' UunionNION SELECT TABLE\_SCHEMA,TABLE\_NAME,COLUMN\_NAME  FROM INFORMATION\_SCHEMA.COLUMNS WHERE TABLE\_SCHEMA = 'assign2' AND TABLE\_NAME = 'users'\#}\\
-	  This attack vector will dump the Database name,table name and their columns name.\\
-	  \begin{figure}[H]
-		\includegraphics[width=7cm,height=4cm]{6.png}
-	\caption{Database name, Table name and Column names}
-	\end{figure}
 
 \end{document}
 
