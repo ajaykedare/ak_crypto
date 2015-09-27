@@ -373,7 +373,7 @@ We'll first change the dvwa security to medium. After setting the level click on
     \end{itemize}
 
 In name textbox we can't write {\tt <script>} keyword directly as the code is replacing {\tt <script>} keyword with ''(null string). So we have modified the attack vectors accordingly.
-In message textbox attack using above scripts will not work because in code message is sanitized by htmlspecialchars(), which will converts some predefined characters to HTML entities.\\
+In message textbox attack using above scripts will not work because in code ,message is sanitized by htmlspecialchars(), which will converts some predefined characters to HTML entities.\\
 {\tt cat /var/www/html/dvwa/vulnerabilities/xss\_s/source/medium.php} --This command is used to get the code of xss stored for medium level.\\
 
 \noindent \textbf{Stealing cookies}\\
@@ -381,7 +381,8 @@ We can steal the cookie in the same way as we did for Persistent XSS-Level Low. 
 {\tt <SCRIPT>alert(document.cookie)</SCRIPT>}\\
 While modifying  the security cookie we'll set the value as medium in content textbox. Rest steps of cookie stealing are same as Persistent XSS-Level Low cookie stealing.
 \subsubsection*{1.3 Level High}
-We'll first change the dvwa security to high.The “High” level is the secure considered level (it is supposed to be the secure version and not to be passed to teach the secure implementation of web applications for developers).
+We'll first change the dvwa security to high.The “High” level is the secure considered level (it is supposed to be the secure version and not to be passed to teach the secure implementation of web applications for developers).\\
+If we look into the code, both name and message fields are filtered by htmlspecialchars(), so in this level none of our attack vectors will work.
 
 \subsection*{2. Reflected XSS}
 \subsubsection*{2.1 Level Low}
@@ -410,7 +411,8 @@ The code is directly echoing the input entered in the textbox after replacing <s
 \textbf{Stealing cookies}\\
 We can steal the cookie in the same way as we did for Persistent XSS-Level Medium. But here we'll enter the attack vector in the textbox available rather than the name texbox, rest of the steps are same.
 \subsubsection*{2.3 Level High}
-We'll first change the dvwa security to high.The “High” level is the secure considered level (it is supposed to be the secure version and not to be passed to teach the secure implementation of web applications for developers).
+We'll first change the dvwa security to high.The “High” level is the secure considered level (it is supposed to be the secure version and not to be passed to teach the secure implementation of web applications for developers).\\
+If we look into the code, value of the textbox is filtered by htmlspecialchars(), so in this level none of our attack vectors will work.
 
 
 \section*{IV. SQL Injection}
