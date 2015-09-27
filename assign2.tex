@@ -69,8 +69,10 @@ do you observe? Comment on your observations.}
 Following steps were followed for computing SHA-1 of the message using openssl:\\
 
 	\begin{figure}[htb]
+	    \begin{center}
 		\includegraphics[width=15cm,height=12cm]{question1.png}
 		\caption{Computing SHA-1 of the message}
+	    \end{center}
 	\end{figure}
 
 \noindent For computing SHA-1 of the message, we created a file of size 1 byte containing only zeroes using following command:\\
@@ -93,9 +95,11 @@ Following steps were followed for computing SHA-1 of the message using openssl:\
 
 \noindent For computing CBC of the message we created a file 'file.txt' that has the message.
 
-\begin{figure}[htb]
+	\begin{figure}[htb]
+	    \begin{center}
 		\includegraphics[width=15cm,height=7cm]{question1b1.png}
 		\caption{Computing AES CBC of the message}
+	     \end{center}
 	\end{figure}
 
 \noindent Figure shows the content of the file that is to be encrypted. The MAC of the message is the last block of the ciphertext.\\
@@ -107,9 +111,11 @@ Following steps were followed for computing SHA-1 of the message using openssl:\
 \noindent To verify the CBC MAC the message is decrypted using the same command with -d option instead of -e and the file containing ciphertext 'out.txt' is provided as input.The output is observed to be same as the plaintext.
 
 
-\begin{figure}[h]
+	\begin{figure}[h]
+	    \begin{center}
 		\includegraphics[width=15cm,height=7cm]{question1b2.png}
 		\caption{Alternating method for computing AES CBC of the message}
+	     \end{center}
 	\end{figure}
 
 
@@ -134,9 +140,11 @@ HMAC-SHA1(file.txt)= e6bffdfa2767f2def627fad887b4ddc226ea5dd9\\
 
 Following steps are performed to sign a message and then verify the signature on that message:
 
-\begin{figure}[h]
+	\begin{figure}[h]
+	      \begin{center}
 		\includegraphics[width=15cm,height=7cm]{question1b3.png}
 		\caption{Signature and verification on the message}
+	      \end{center}
 	\end{figure}
 
 \noindent Firstly, using RSA algorithm with n=2048 bits and e=3 private key is generated and stored in privkey-ID.pem\\
@@ -300,7 +308,7 @@ for i in range(8,34 ,2):
     babystepgiantstep(i)
 \end{python}
 
-\vspace{50px}
+\vspace{70px}
 \noindent Using this we computed the execution time for calculating the discrete log for prime numbers of different bits. \\
 
 \noindent Below is the graph plotted for prime number in bits against exection time in seconds. \\
@@ -328,63 +336,76 @@ to generate a page of results for that user, without properly sanitizing the req
 \subsection*{1. Persistent XSS}
 \subsubsection*{1.1 Level Low}
 We'll first change the dvwa security to low.After setting the level click on XSS stored( present on left side).A page will open having name , message textbox along with 'sign guestbook' button. We can enter below attack vectors in name and message textbox.\\
-Name: User\\
-Message: <script> alert("hi")</script>\\
+{\tt Name: User}\\
+{\tt Message: <script> alert("hi")</script>}\\
 When user clicks on 'sign guestbook' button, a alert popup box will appear having message 'hi'.\\
-cat /var/www/html/dvwa/vulnerabilities/xss\_s/source/low.php-This command is used to get the code of xss stored for low level.\\
-Reason for working of attack vector: The two parameters “message” and “name” present in the code  are not sanitized properly.We store these
-parameters into the guestbook table, So when we displaying these parameters back the client browser,
+{\tt cat /var/www/html/dvwa/vulnerabilities/xss\_s/source/low.php} --This command is used to get the code of xss stored for low level.\\
+Reason for working of attack vector: The two parameters “message” and “name” present in the code are not sanitized properly. We store these
+parameters into the guestbook table, so when we are displaying these parameters back in the client browser,
 it will execute the malicious JavaScript code.\\
 \textbf{Stealing cookies}\\
  We can enter below attack vectors in name and message textbox.\\
-Name: User\\
-Message: <script>alert(document.cookie)</script>\\
-When user clicks on 'sign guestbook' button,below alert popup box will appear.\\
-\begin{figure}[htb]
+{\tt Name: User}\\
+{\tt Message: <script>alert(document.cookie)</script>}\\
+When user clicks on 'sign guestbook' button, below alert popup box will appear.\\
+	\begin{figure}[htb]
+	    \begin{center}
 		\includegraphics[width=8cm,height=2cm]{cookies.jpg}
 		\caption{Alert popup showing cookie value}
+	    \end{center}
 	\end{figure}
 
-Copy this PHPSESSID from the alertbox and save it in a file.This is our cookie and now we have to consume it.There is an add-on for the Mozilla browser titled cookie editor. It is a tool that will let us view the cookies as well as allow us to  edit them.\\
+Copy this {\bf PHPSESSID} from the alertbox and save it in a file. This is our cookie and now we have to consume it. There is an add-on for the Mozilla browser titled cookie editor. It is a tool that will let us view the cookies as well as allow us to edit them.\\
 On second machine we'll open the DVWA login page. Now open the cookie editor and search for localhost and we will see the below image
-\begin{figure}[htb]
+	\begin{figure}[htb]
+	    \begin{center}
 		\includegraphics[width=10cm,height=4cm]{cookieeditor.png}
 		\caption{Editing cookie value in Cookie Editor}
+	    \end{center}
 	\end{figure}
-First we'll edit the PHPSESSID cookie and paste the cookie which we have copied earlier in the content textbox. Then we'll modify the security cookie and set the value as low in content textbox and save the changes.Now we'll remove the "login.php" from the URL address and when we press enter we'll be able to login into the dvwa site without providing any credentials.
+First we'll edit the {\bf PHPSESSID} cookie and paste the cookie which we have copied earlier in the content textbox. Then we'll modify the security cookie and set the value as low in content textbox and save the changes. Now we'll remove the "login.php" from the URL address and when we press enter we'll be able to login into the dvwa site without providing any credentials.
 \subsubsection*{1.2 Level Medium}
 We'll first change the dvwa security to medium. After setting the level click on XSS stored( present on left side). We can enter any one of the  below attack vectors in name textbox. But the size of any input text in name textbox can't be more than 10 characters (maxlength=10), so using firebug we can change the maxlength=80 and then we can enter the below scripts.\\
-\\  <script language="javascript">alert("Hi")</script>\\
-<scrip<script>t> alert("hi")</script>\\
-<SCRIPT> alert('hi');</SCRIPT>\\
-In name textbox we can't write <script> keyword directly as the code is replacing <script> keyword with ''(null string).So we have modified the attack vectors accordingly.
-In message textbox attack using above scripts will not work because in code message is sanitized by htmlspecialchars(), which will converts some predefined characters to HTML entities.\\
-cat /var/www/html/dvwa/vulnerabilities/xss\_s/source/medium.php-This command is used to get the code of xss stored for medium level.\\
+\\  \begin{itemize}
+     \item {\tt <script language="javascript">alert("hi")</script>}
+     \item {\tt <scrip<script>t> alert("hi")</script>}
+     \item {\tt <SCRIPT> alert("hi");</SCRIPT>}
+    \end{itemize}
 
-\textbf{Stealing cookies}\\
+In name textbox we can't write {\tt <script>} keyword directly as the code is replacing {\tt <script>} keyword with ''(null string). So we have modified the attack vectors accordingly.
+In message textbox attack using above scripts will not work because in code message is sanitized by htmlspecialchars(), which will converts some predefined characters to HTML entities.\\
+{\tt cat /var/www/html/dvwa/vulnerabilities/xss\_s/source/medium.php} --This command is used to get the code of xss stored for medium level.\\
+
+\noindent \textbf{Stealing cookies}\\
 We can steal the cookie in the same way as we did for Persistent XSS-Level Low. But now our attack vector will be in below form and need to put it in name textbox.\\
-<SCRIPT>alert(document.cookie)</SCRIPT>\\
+{\tt <SCRIPT>alert(document.cookie)</SCRIPT>}\\
 While modifying  the security cookie we'll set the value as medium in content textbox. Rest steps of cookie stealing are same as Persistent XSS-Level Low cookie stealing.
 \subsubsection*{1.3 Level High}
 We'll first change the dvwa security to high.The “High” level is the secure considered level (it is supposed to be the secure version and not to be passed to teach the secure implementation of web applications for developers).
 
 \subsection*{2. Reflected XSS}
 \subsubsection*{2.1 Level Low}
-We'll first change the dvwa security to low.After setting the level click on XSS Reflected( present on left side).A page will open having a textbox and 'submit' button. We can enter below attack vectors in the textbox.\\
-<script> alert('hi');</script>\\
-<SCRIPT> alert('hi');</SCRIPT>\\
-cat /var/www/html/dvwa/vulnerabilities/xss\_r/source/low.php--This command is used to get the code of xss Reflected for low level.\\
+We'll first change the dvwa security to low. After setting the level click on XSS Reflected( present on left side).A page will open having a textbox and 'submit' button. We can enter below attack vectors in the textbox.\\
+\begin{itemize}
+     \item {\tt <script> alert('hi');</script>}
+     \item {\tt <SCRIPT> alert('hi');</SCRIPT>}
+\end{itemize}
+
+\noindent {\tt cat /var/www/html/dvwa/vulnerabilities/xss\_r/source/low.php}  --This command is used to get the code of xss Reflected for low level.\\
 The code is directly echoing the input entered in the textbox without any filtering and sanitization.\\
 \textbf{Stealing cookies}\\
 We can steal the cookie in the same way as we did for Persistent XSS-Level Low. But here we'll enter the attack vector in the textbox available rather than the message texbox, rest of the steps are same.
 
 \subsubsection*{2.2 Level Medium}
-We'll first change the dvwa security to medium.After setting the level click on XSS Reflected( present on left side).A page will open having a textbox and 'submit' button. We can enter below attack vectors in the textbox.\\
-<script language="javascript">alert("Hi")</script>\\
-<scrip<script>t> alert("hi")</script>\\
-<SCRIPT> alert('hi');</SCRIPT>\\
-In the textbox we can't write <script> keyword directly as the code is replacing <script> keyword with ''(null string).So we have modified the attack vectors accordingly.
-cat /var/www/html/dvwa/vulnerabilities/xss\_r/source/medium.php--This command is used to get the code of xss Reflected for medium level.\\
+We'll first change the dvwa security to medium. After setting the level click on XSS Reflected( present on left side). A page will open having a textbox and 'submit' button. We can enter below attack vectors in the textbox.\\
+\begin{itemize}
+     \item {\tt <script language="javascript">alert("Hi");</script>}
+     \item {\tt <scrip<script>t> alert("hi");</script>}
+     \item {\tt <SCRIPT> alert("hi");</SCRIPT>}
+\end{itemize}
+
+In the textbox we can't write <script> keyword directly as the code is replacing <script> keyword with ''(null string). So we have modified the attack vectors accordingly.
+{\tt cat /var/www/html/dvwa/vulnerabilities/xss\_r/source/medium.php} --This command is used to get the code of xss Reflected for medium level.\\
 The code is directly echoing the input entered in the textbox after replacing <script> keyword with ''(null string). .\\
 \textbf{Stealing cookies}\\
 We can steal the cookie in the same way as we did for Persistent XSS-Level Medium. But here we'll enter the attack vector in the textbox available rather than the name texbox, rest of the steps are same.
@@ -398,9 +419,11 @@ We'll first change the dvwa security to high.The “High” level is the secure 
   Attack vector for this level is:\\
         \textbf{a.\space \space admin'\#}\\
   Using this in 'User name' field, we can login as an 'admin' and create/add a user.\\
-  \begin{figure}[htb]
+	\begin{figure}[htb]
+	    \begin{center}
 		\includegraphics[width=8cm,height=5cm]{1.png}
-	\caption{Creating a user}
+		\caption{Creating a user}
+	    \end{center}
 	\end{figure}
        
        \textbf{b.\space \space 'union all select user,pass from users where user='admin'\#}\\
@@ -408,8 +431,10 @@ We'll first change the dvwa security to high.The “High” level is the secure 
                This will dump the password of admin on the Home page.\\
    
    \begin{figure}[htb]
-		\includegraphics[width=8cm,height=4cm]{2.png}
-	\caption{Getting the password of admin}
+	    \begin{center}
+		\includegraphics[width=10cm,height=4cm]{2.png}
+		\caption{Getting the password of admin}
+	    \end{center}
 	\end{figure}
         Encircled text is the password of the admin.\\
 
@@ -420,8 +445,10 @@ We'll first change the dvwa security to high.The “High” level is the secure 
         This will just dump the name of all the users and their passwords on the page.\\
         
         \begin{figure}[H]
-		\includegraphics[width=8cm,height=8cm]{3.png}
-	\caption{Passwords of users}
+	      \begin{center}
+		\includegraphics[width=10cm,height=8cm]{3.png}
+		\caption{Passwords of users}
+	      \end{center}
 	\end{figure}
 	
 	Some other attack vectors(all tried on search name box):\\
@@ -434,8 +461,10 @@ We'll first change the dvwa security to high.The “High” level is the secure 
 	           this will help us to design the attack vectors and also to improve them.\\
         
         \begin{figure}[H]
-		\includegraphics[width=8cm,height=8cm]{4.png}
-	\caption{Code snippet of login.php}
+	    \begin{center}
+	    	\includegraphics[width=10cm,height=8cm]{4.png}
+	    	\caption{Code snippet of login.php}
+	     \end{center}
 	\end{figure}
         
 \subsection*{3. (Level 3) Find out names of all the tables in the database.}
@@ -448,8 +477,10 @@ We'll first change the dvwa security to high.The “High” level is the secure 
              This attack vectors dumps the information related to TABLES and INFORMATION\_SCHEMA.\\
              Here,in attack vectors \textbf{UunionNION} is used in place of \textbf{UNION} to bypass \textbf{str\_ireplace()} function.
              \begin{figure}[H]
-		\includegraphics[width=8cm,height=8cm]{5.png}
-	\caption{Tables name and information schema}
+             \begin{center}
+		    \includegraphics[width=10cm,height=8cm]{5.png}
+		    \caption{Tables name and information schema}
+		\end{center}
 	\end{figure}
 	
 	\textbf{(b) \space \space \%' UunionNION All select TABLE\_TYPE,TABLE\_SCHEMA,table\_name FROM INFORMATION\_SCHEMA.TABLES where TABLE\_SCHEMA='assign2'\#}\\
@@ -457,8 +488,10 @@ We'll first change the dvwa security to high.The “High” level is the secure 
 	 \textbf{(c)\space \space\%' UunionNION SELECT TABLE\_SCHEMA,TABLE\_NAME,COLUMN\_NAME  FROM INFORMATION\_SCHEMA.COLUMNS WHERE TABLE\_SCHEMA = 'assign2' AND TABLE\_NAME = 'users'\#}\\
 	  This attack vector will dump the Database name,table name and their columns name.\\
 	  \begin{figure}[H]
-		\includegraphics[width=7cm,height=4cm]{6.png}
-	\caption{Database name, Table name and Column names}
+	    \begin{center}
+	      \includegraphics[width=10cm,height=4cm]{6.png}
+	      \caption{Database name, Table name and Column names}
+	    \end{center}
 	\end{figure}
 
 \end{document}
