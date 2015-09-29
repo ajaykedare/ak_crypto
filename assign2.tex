@@ -246,8 +246,6 @@ def computeInverse(b,c):
 # Main function that calculates discrete log
 def babystepgiantstep(noOfBits):
     t0=time.clock()
-    g = 871292   
-    p = 1048573 
     p=rand_prime(noOfBits)  # the prime number
     print "Number of bits :", noOfBits
     print "Prime Number :",p
@@ -304,18 +302,19 @@ def babystepgiantstep(noOfBits):
 
 
 #Calculate execution time for different no of bits
-for i in range(8,34 ,2):
+for i in range(8,34,2):
     babystepgiantstep(i)
 \end{python}
 
 \vspace{70px}
 \noindent Using this we computed the execution time for calculating the discrete log for prime numbers of different bits. \\
+\noindent From this we conclude that for smaller prime number values it is easier to calculate the discrete log but for larger prime numbers it is taking longer time and practically infeasible to calculate for very large values.\\
 
 \noindent Below is the graph plotted for prime number in bits against exection time in seconds. \\
 
 \begin{figure}[htb]
 		\includegraphics[width=15cm,height=8cm]{bsgsGraph}
-		\caption{Execution Time for large prime numbers}
+		\caption{Execution Time Graph}
 \end{figure}
 
 
